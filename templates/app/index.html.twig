@@ -23,7 +23,7 @@
             <table class="table table-bordered table-striped table-hover">
                 <thead>
                     <tr>
-                        <th>Poster></th>
+                        <th>Poster</th>
                         <th>Id Movie</th>
                         <th>Id Movie en TMDB</th>
                         <th>Título</th>
@@ -40,7 +40,7 @@
                     <td>{{ movie.id_movie_mdb }}</td>
                     <td>{{ movie.title }}</td>
                     <td>{{ movie.valoration }}</td>
-                    <td>
+                    <td style="display: flex;gap: 5px;flex-direction: column;">
                         <button class="btn btn-success">Valorar</button>
                         <button class="btn btn-danger">Eliminar</button>
                     </td>

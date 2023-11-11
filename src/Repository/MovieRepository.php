@@ -32,6 +32,26 @@ class MovieRepository extends ServiceEntityRepository
         return $qb->getQuery()->getResult();
     }
 
+    public function searchByIdMovie($id_movie): array
+    {
+        $qb = $this->createQueryBuilder('m')
+        ->where('m.id_movie = '. $id_movie);
+        return $qb->getQuery()->getResult();
+    }
+
+    public function insertMovie($movie)
+    {
+        $new_movie = new Movie();
+        $new_movie->setid_movie_mdb($movie->id);
+        $new_movie->settitle($movie->title);
+        $new_movie->setvaloration("5");
+        $new_movie->setposter($movie->poster_path);
+        $em = $this->getEntityManager();
+        $em->persist($new_movie);
+        $em->flush();
+        return true;
+    }
+
     public function findLatest(int $page = 1, Tag $tag = null): Paginator
     {
         $qb = $this->createQueryBuilder('p')

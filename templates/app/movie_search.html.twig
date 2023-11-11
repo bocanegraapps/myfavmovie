@@ -33,7 +33,7 @@
                     <td>{{ result.popularity }}</td>
                     <td>{{ result.vote_average }}</td>
                     <td>
-                        <a href="#" class="btn btn-success">Añadir</a>
+                        <a href="{{ path('add_movie', {'movieId': result.id}) }}" class="btn btn-success">Añadir</a>
                     </td>
                 </tr>
                 {% endfor %}

@@ -80,4 +80,36 @@ final class MovieController extends AbstractController
         
     }
 
+    #[Route('/add_movie/{movieId}', name:"add_movie", methods:['GET'])]
+    public function add_movie(array $_route_params, MovieRepository $movies) : Response
+    {
+        $movie_id = $_route_params['movieId'];
+        //retrieve movie from API pass movie_id
+        $tmbd_apikey = "eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI3YWZhNzc0N2JjYjJmZGVhM2FjODRhZjhlNzk3YTliMCIsInN1YiI6IjY1NGY4ZTM1ZDRmZTA0MDEzOTdmNDc3NiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.8SFMlFimhoLrjso7gqMFJ0wTH6yfFWh81tPCRfDjlK0";
+        $client = new \GuzzleHttp\Client();
+        $response = $client->request('GET', 'http://api.themoviedb.org/3/movie/'.$movie_id.'&include_adult=false&language=es-ES', [
+            'headers' => [
+            'Authorization' => 'Bearer '.$tmbd_apikey,
+            'accept' => 'application/json',
+            ],
+        ]);
+
+        $results = json_decode($response->getBody()->getContents());
+
+        //persist in database
+
+        $movie = $movies->searchByIdMovie($results->id);
+
+        if (!$movie)
+        {
+            $movies->insertMovie($results);
+            
+        }
+
+        $allMovies = $movies->showAll();
+        return $this->render('app/index.html.twig', ['allMovies' => $allMovies]);
+
+    }
+
+    
 }
