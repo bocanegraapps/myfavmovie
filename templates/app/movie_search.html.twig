@@ -8,6 +8,42 @@
         See https://symfony.com/bundles/ux-twig-component/current/index.html
     #}
     {{ component('movie_search', {}) }}
+    {% if results %}
+    <p style="text-align:center;">Has buscado <strong>{{ cad_busqueda }}</strong></p>
+    <div class="row">
+        <div class="col-sm-12">
+            <table class="table table-bordered table-striped table-hover">
+                <thead>
+                    <tr>
+                        <th>Poster</th>
+                        <th>Id Movie en TMDB</th>
+                        <th>Título</th>
+                        <th>Popularidad</th>
+                        <th>Puntuación media</th>
+                        <th>Gestiones</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                 {% for result in results %}
+                <tr>
+                    <td><img src='https://image.tmdb.org/t/p/w94_and_h141_bestv2/{{ result.poster_path }}'</td>
+                    <td>{{ result.id }}</td>
+                    <td>{{ result.title }} ({{ result.original_title }})</td>
+                    <td>{{ result.popularity }}</td>
+                    <td>{{ result.vote_average }}</td>
+                    <td>
+                        <a href="#" class="btn btn-success">Añadir</a>
+                    </td>
+                </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+         </div>
+</div>
+       
+            
+            {% endif %}
 {% endblock %}
 
 {% block sidebar %}

@@ -38,7 +38,10 @@ class Movie
     private ?string $title = null;
 
     #[ORM\Column(type: Types::INTEGER)]
-    private ?string $valoration = null;
+    private ?int $valoration = null;
+
+    #[ORM\Column(type: Types::STRING)]
+    private ?string $poster = null;
 
     public function __construct()
     {
@@ -78,6 +81,16 @@ class Movie
     public function setvaloration(int $valoration): void
     {
         $this->valoration = $valoration;
+    }
+
+    public function getposter(): ?string
+    {
+        return $this->poster;
+    }
+
+    public function setposter(string $poster): void
+    {
+        $this->poster = $poster;
     }
 
     public function getcreated_at(): \DateTime

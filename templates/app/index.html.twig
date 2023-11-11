@@ -23,6 +23,7 @@
             <table class="table table-bordered table-striped table-hover">
                 <thead>
                     <tr>
+                        <th>Poster></th>
                         <th>Id Movie</th>
                         <th>Id Movie en TMDB</th>
                         <th>Título</th>
@@ -34,6 +35,7 @@
                 <tbody>
                 {% for movie in allMovies %}
                 <tr>
+                    <td><img src='https://image.tmdb.org/t/p/w94_and_h141_bestv2/{{ movie.poster }}'></td>
                     <td>{{ movie.id_movie }}</td>
                     <td>{{ movie.id_movie_mdb }}</td>
                     <td>{{ movie.title }}</td>

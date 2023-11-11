@@ -48,10 +48,6 @@ final class MovieController extends AbstractController
     #[Cache(smaxage: 10)]
     public function index(Request $request, int $page, string $_format, MovieRepository $movies): Response
     {
-        // Every template name also has two extensions that specify the format and
-        // engine for that template.
-        // See https://symfony.com/doc/current/templates.html#template-naming
-
         $allMovies = $movies->showAll();
 
         return $this->render('app/index.'.$_format.'.twig', ['allMovies' => $allMovies]);
@@ -61,10 +57,27 @@ final class MovieController extends AbstractController
     #[Cache(smaxage: 10)]
     public function movie_search(Request $request): Response
     {
-        // Every template name also has two extensions that specify the format and
-        // engine for that template.
-        // See https://symfony.com/doc/current/templates.html#template-naming
-        return $this->render('app/movie_search.html.twig', []);
+       return $this->render('app/movie_search.html.twig', ['results' => [],'cad_busqueda' => '']);
     }
     
+    #[Route('/movie_search_results', name:"movie_search_results", methods: ['POST'])]
+    public function movie_search_results(Request $r) : Response
+    {
+        $cad_busqueda = $r->request->get('buscar');
+        $tmbd_apikey = "eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI3YWZhNzc0N2JjYjJmZGVhM2FjODRhZjhlNzk3YTliMCIsInN1YiI6IjY1NGY4ZTM1ZDRmZTA0MDEzOTdmNDc3NiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.8SFMlFimhoLrjso7gqMFJ0wTH6yfFWh81tPCRfDjlK0";
+
+        $client = new \GuzzleHttp\Client();
+        $response = $client->request('GET', 'http://api.themoviedb.org/3/search/movie?query='.$cad_busqueda.'&include_adult=false&language=es-ES', [
+            'headers' => [
+            'Authorization' => 'Bearer '.$tmbd_apikey,
+            'accept' => 'application/json',
+            ],
+        ]);
+
+        $results = json_decode($response->getBody()->getContents());
+        
+        return $this->render('app/movie_search.html.twig',['results' => $results->results, 'cad_busqueda' => $cad_busqueda]);
+        
+    }
+
 }
