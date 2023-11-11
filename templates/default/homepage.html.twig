@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block body_id 'homepage' %}
+
+{#
+    the homepage is a special page which displays neither a header nor a footer.
+    this is done with the 'trick' of defining empty Twig blocks without any content
+#}
+{% block header %}{% endblock %}
+{% block footer %}{% endblock %}
+
+{% block body %}
+    <div class="page-header">
+        <h1>{{ 'title.homepage'|trans|raw }}</h1>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="jumbotron">
+                <p>
+                    Esta aplicación es el proyecto final del Track de PHP de Hack A Boss impartido por Guillermo Maquieira. Está programada con Symfony en base a su proyecto DEMO modificado
+                </p>
+                <p>
+                    <a class="btn btn-primary btn-lg" href="{{ path('main_app_index') }}">
+                        <i class="fa fa-users" aria-hidden="true"></i> Haz click <strong> aquí </strong> para acceder a la aplicación
+                    </a>
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-12">
+            <p> &copy 2023 desarrollado por Mario Rodríguez para Hack A Boss y EMAIS </p>
+        </div>
+    </div>
+{% endblock %}
