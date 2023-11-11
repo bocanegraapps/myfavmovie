@@ -12,11 +12,11 @@
 namespace App\Controller;
 
 use App\Entity\Comment;
-use App\Entity\Post;
+use App\Entity\Movie;
 use App\Entity\User;
 use App\Event\CommentCreatedEvent;
 use App\Form\CommentType;
-use App\Repository\PostRepository;
+use App\Repository\MovieRepository;
 use App\Repository\TagRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bridge\Doctrine\Attribute\MapEntity;
@@ -46,23 +46,25 @@ final class MovieController extends AbstractController
      */
     #[Route('/main_app_index', name: 'main_app_index', defaults: ['page' => '1', '_format' => 'html'], methods: ['GET'])]
     #[Cache(smaxage: 10)]
-
-    public function index(Request $request, int $page, string $_format, PostRepository $posts, TagRepository $tags): Response
+    public function index(Request $request, int $page, string $_format, MovieRepository $movies): Response
     {
-        $tag = null;
-        if ($request->query->has('tag')) {
-            $tag = $tags->findOneBy(['name' => $request->query->get('tag')]);
-        }
-        $latestPosts = $posts->findLatest($page, $tag);
-
         // Every template name also has two extensions that specify the format and
         // engine for that template.
         // See https://symfony.com/doc/current/templates.html#template-naming
-        return $this->render('app/index.'.$_format.'.twig', [
-            'paginator' => $latestPosts,
-            'tagName' => $tag?->getName(),
-        ]);
-    }
 
+        $allMovies = $movies->showAll();
+
+        return $this->render('app/index.'.$_format.'.twig', ['allMovies' => $allMovies]);
+    }
+   
+    #[Route('/movie_search', name: 'movie_search', methods: ['GET'])]
+    #[Cache(smaxage: 10)]
+    public function movie_search(Request $request): Response
+    {
+        // Every template name also has two extensions that specify the format and
+        // engine for that template.
+        // See https://symfony.com/doc/current/templates.html#template-naming
+        return $this->render('app/movie_search.html.twig', []);
+    }
     
 }

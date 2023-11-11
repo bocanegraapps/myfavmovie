@@ -33,7 +33,7 @@
                 <nav class="navbar navbar-expand-lg fixed-top navbar-dark bg-primary">
                     <div class="container">
                         <a class="navbar-brand" href="{{ path('homepage') }}">
-                            Symfony Demo
+                            My Fav Movies
                         </a>
                         <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#appNavbar" aria-controls="appNavbar" aria-expanded="false" aria-label="Toggle navigation">
                         <span class="navbar-toggler-icon"></span>
@@ -42,49 +42,16 @@
                         <div class="navbar-collapse collapse" id="appNavbar">
                             <ul class="navbar-nav ml-auto">
                                 {% block header_navigation_links %}
-                                    <li class="nav-item{{ _route == 'blog_index' ? ' active' : '' }}">
-                                        <a class="nav-link" href="{{ path('blog_index') }}">
+                                    <li class="nav-item{{ _route == 'homepage' ? ' active' : '' }}">
+                                        <a class="nav-link" href="{{ path('homepage') }}">
                                             <i class="fa fa-home" aria-hidden="true"></i> {{ 'menu.homepage'|trans }}
                                         </a>
                                     </li>
-                                    {% if is_granted('ROLE_ADMIN') %}
-                                        <li class="nav-item">
-                                            <a class="nav-link" href="{{ path('admin_post_index') }}">
-                                                <i class="fa fa-lock" aria-hidden="true"></i> {{ 'menu.admin'|trans }}
-                                            </a>
-                                        </li>
-                                    {% endif %}
+                                    
                                 {% endblock %}
 
-                                <li class="nav-item{{ _route == 'blog_search' ? ' active' : '' }}">
-                                    <a class="nav-link" href="{{ path('blog_search') }}"> <i class="fa fa-search"></i> {{ 'menu.search'|trans }}</a>
-                                </li>
-
-                                {% if app.user %}
-                                    <li class="nav-item dropdown">
-                                        <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" id="user">
-                                            <i class="fa fa-user" aria-hidden="true"></i>
-                                            <span class="caret"></span>
-                                            <span class="sr-only">{{ app.user.fullname }}</span>
-                                        </a>
-                                        <div class="dropdown-menu user" role="menu" aria-labelledby="user">
-                                            <a class="dropdown-item" href="{{ path('user_edit') }}">
-                                                <i class="fa fa-edit" aria-hidden="true"></i> {{ 'menu.user'|trans }}
-                                            </a>
-                                            <div class="dropdown-divider"></div>
-                                            <a class="dropdown-item" href="{{ logout_path() }}">
-                                                <i class="fa fa-sign-out" aria-hidden="true"></i> {{ 'menu.logout'|trans }}
-                                            </a>
-                                        </div>
-                                    </li>
-                                {% endif %}
-
-                                <li class="nav-item dropdown">
-                                    <a href="#" class="nav-link dropdown-toggle" data-toggle="modal" data-target="#locale-selector-modal" role="button" id="locales">
-                                        <i class="fa fa-solid fa-globe" aria-hidden="true"></i>
-                                        <span class="caret"></span>
-                                        <span class="sr-only">{{ 'menu.choose_language'|trans }}</span>
-                                    </a>
+                                <li class="nav-item{{ _route == 'movie_search' ? ' active' : '' }}">
+                                    <a class="nav-link" href="{{ path('movie_search') }}"> <i class="fa fa-search"></i> {{ 'menu.search'|trans }}</a>
                                 </li>
                             </ul>
                         </div>
@@ -136,7 +103,7 @@
                     <div id="sidebar" class="col-sm-3">
                         {% block sidebar %}
                             {{ render_esi(controller('Symfony\\Bundle\\FrameworkBundle\\Controller\\TemplateController::templateAction', {
-                                'template': 'blog/about.html.twig',
+                                'template': 'app/about.html.twig',
                                 'sharedAge': 600,
                                 '_locale': app.request.locale
                             })) }}
@@ -150,21 +117,16 @@
             <footer>
                 <div class="container">
                     <div class="row">
-                        <div id="footer-copyright" class="col-md-6">
-                            <p>&copy; {{ 'now'|date('Y') }} - The Symfony Project</p>
-                            <p>{{ 'mit_license'|trans }}</p>
+                        <div id="footer-copyright" class="col-md-9">
+                            <p>&copy; {{ 'now'|date('Y') }} - un proyecto para Hack A Boss bajo la supervisión de Guillermo Maquieira para EMAIS</p>
+                            
                         </div>
-                        <div id="footer-resources" class="col-md-6">
+                        <div id="footer-resources" class="col-md-3">
                             <p>
-                                <a href="https://twitter.com/symfony" title="Symfony Twitter">
-                                    <i class="fa fa-twitter" aria-hidden="true"></i>
+                                <a href="https://github.com/bocanegraapps/myfavmovie" title="Ver en GitHub">
+                                    <i class="fa fa-github" aria-hidden="true"></i>
                                 </a>
-                                <a href="https://www.facebook.com/SensioLabs" title="SensioLabs Facebook">
-                                    <i class="fa fa-facebook" aria-hidden="true"></i>
-                                </a>
-                                <a href="https://symfony.com/blog/" title="Symfony Blog">
-                                    <i class="fa fa-rss" aria-hidden="true"></i>
-                                </a>
+                                
                             </p>
                         </div>
                     </div>
