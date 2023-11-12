@@ -8,6 +8,8 @@ Esto es una aplicación creada en symfony para el track de PHP de Hack a Boss im
 
   * PHP 8.2;
   * Extensión PDO-Mysql activada en php.ini
+  * Extensión CURL activada en php.ini
+  * Se incluye un fichero php.ini que se ha usado con el proyecto a modo de ejemplo para configurar vuestro entorno php, está en la carpeta ETC
   * Composer
   * Mysql Community Server
 
