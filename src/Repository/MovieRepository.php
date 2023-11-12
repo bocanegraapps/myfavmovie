@@ -1,19 +1,8 @@
 <?php
 
-/*
- * This file is part of the Symfony package.
- *
- * (c) Fabien Potencier <fabien@symfony.com>
- *
- * For the full copyright and license information, please view the LICENSE
- * file that was distributed with this source code.
- */
-
 namespace App\Repository;
 
 use App\Entity\Movie;
-use App\Entity\Tag;
-use App\Pagination\Paginator;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 use function Symfony\Component\String\u;
@@ -35,7 +24,7 @@ class MovieRepository extends ServiceEntityRepository
     public function searchByIdMovie($id_movie): array
     {
         $qb = $this->createQueryBuilder('m')
-        ->where('m.id_movie = '. $id_movie);
+        ->where('m.id_movie_mdb = '. $id_movie);
         return $qb->getQuery()->getResult();
     }
 
@@ -52,63 +41,30 @@ class MovieRepository extends ServiceEntityRepository
         return true;
     }
 
-    public function findLatest(int $page = 1, Tag $tag = null): Paginator
+    public function killMovie($id_movie)
     {
-        $qb = $this->createQueryBuilder('p')
-            ->addSelect('a', 't')
-            ->innerJoin('p.author', 'a')
-            ->leftJoin('p.tags', 't')
-            ->where('p.publishedAt <= :now')
-            ->orderBy('p.publishedAt', 'DESC')
-            ->setParameter('now', new \DateTime())
-        ;
-
-        if (null !== $tag) {
-            $qb->andWhere(':tag MEMBER OF p.tags')
-                ->setParameter('tag', $tag);
+        $movie = $this->find($id_movie);
+        if ($movie)
+        {
+            $em = $this->getEntityManager();
+            $em->remove($movie);
+            $em->flush();
         }
-
-        return (new Paginator($qb))->paginate($page);
+        return true;
     }
 
-   
-    public function findBySearchQuery(string $query, int $limit = Paginator::PAGE_SIZE): array
+    public function updateValoration($valoration, $id_movie)
     {
-        $searchTerms = $this->extractSearchTerms($query);
-
-        if (0 === \count($searchTerms)) {
-            return [];
+        $movie = $this->find($id_movie);
+        if ($movie)
+        {
+            $movie->setvaloration($valoration);
+            $em = $this->getEntityManager();
+            $em->persist($movie);
+            $em->flush();
         }
-
-        $queryBuilder = $this->createQueryBuilder('p');
-
-        foreach ($searchTerms as $key => $term) {
-            $queryBuilder
-                ->orWhere('p.title LIKE :t_'.$key)
-                ->setParameter('t_'.$key, '%'.$term.'%')
-            ;
-        }
-
-        /** @var Post[] $result */
-        $result = $queryBuilder
-            ->orderBy('p.publishedAt', 'DESC')
-            ->setMaxResults($limit)
-            ->getQuery()
-            ->getResult()
-        ;
-
-        return $result;
+        return true;
     }
 
-   
-    private function extractSearchTerms(string $searchQuery): array
-    {
-        $searchQuery = u($searchQuery)->replaceMatches('/[[:space:]]+/', ' ')->trim();
-        $terms = array_unique($searchQuery->split(' '));
-
-        // ignore the search terms that are too short
-        return array_filter($terms, static function ($term) {
-            return 2 <= $term->length();
-        });
-    }
+    
 }

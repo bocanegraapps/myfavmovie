@@ -9,12 +9,6 @@
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1"/>
         <title>{% block title %}My Fav Movies (Proyecto final del track PHP de Hack a Boss){% endblock %}</title>
-        <link rel="alternate" type="application/rss+xml" title="{{ 'rss.title'|trans }}" href="{{ path('blog_rss') }}">
-
-        {#
-            Those two blocks defines frontend entrypoint for CSS and JavaScript assets
-            See https://symfony.com/doc/current/frontend.html
-        #}
         {% block stylesheets %}
             {{ encore_entry_link_tags('app') }}
         {% endblock %}
@@ -22,7 +16,7 @@
             {{ encore_entry_script_tags('app') }}
         {% endblock %}
 
-        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+        <link rel="icon" type="image/x-icon" href="{{ asset('claqueta.ico') }}" />
     </head>
 
     <body id="{% block body_id %}{% endblock %}">
@@ -95,8 +89,7 @@
             {% block body %}
                 <div class="row">
                     <div id="main" class="col-sm-9">
-                        {{ include('default/_flash_messages.html.twig') }}
-
+                        
                         {% block main %}{% endblock %}
                     </div>
 

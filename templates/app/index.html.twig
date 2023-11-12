@@ -41,10 +41,49 @@
                     <td>{{ movie.title }}</td>
                     <td>{{ movie.valoration }}</td>
                     <td style="display: flex;gap: 5px;flex-direction: column;">
-                        <button class="btn btn-success">Valorar</button>
-                        <button class="btn btn-danger">Eliminar</button>
+                        <a data-toggle="modal" data-target="#valorar{{ movie.id_movie }}" href="#" class="btn btn-success">Valorar</a>
+                        <a data-toggle="modal" data-target="#eliminar{{ movie.id_movie }}" href="#" class="btn btn-danger">Eliminar</a>
                     </td>
                 </tr>
+                <div class="modal" id="valorar{{ movie.id_movie }}" tabindex="-1">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Establecer valoración</h5>
+                            <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <p>Establece la valoración personal para esta película favorita</p>
+                            <form action="{{ path('update_valoration', {'movieId': movie.id_movie}) }}" method="POST">
+                                <input class="form-control" name="valoration" value="{{ movie.valoration }}" type="number" min="0" max="10" />
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                            <button type="submit" class="btn btn-primary">Guardar Cambos</button>
+                        </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="modal" id="eliminar{{ movie.id_movie }}" tabindex="-1">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Eliminar película</h5>
+                            <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <p>Esta acción eliminará la película de tu lista de favoritos, es irreversible, ¿deseas continuar?</p>
+                        </div>
+                        <div class="modal-footer">
+                            <a type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</a>
+                            <a href="{{ path('kill_movie', {'movieId': movie.id_movie}) }}" type="button" class="btn btn-danger">Sí, eliminar</a>
+                        </div>
+                        </div>
+                    </div>
+                </div>
+
                 {% endfor %}
                 </tbody>
             </table>
