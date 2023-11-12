@@ -1,85 +1,41 @@
-Symfony Demo Application
-========================
+My Fav Movie Symfony FullStack Project
+======================================
 
-The "Symfony Demo Application" is a reference application created to show how
-to develop applications following the [Symfony Best Practices][1].
+Esto es una aplicación creada en symfony para el track de PHP de Hack a Boss impartido por Guillermo Maquieira para EMAIS para demostrar los conceptos adquiridos en PHP durante ese track para la certificación del mismo.
 
-You can also learn about these practices in [the official Symfony Book][5].
+¿Qué requerimientos necesitas para hacer funcionar el proyecto?
+---------------------------------------------------------------
 
-Requirements
-------------
+  * PHP 8.2;
+  * Extensión PDO-Mysql activada en php.ini
+  * Composer
+  * Mysql Community Server
 
-  * PHP 8.1.0 or higher;
-  * PDO-SQLite PHP extension enabled;
-  * and the [usual Symfony application requirements][2].
+Preparar el entorno de desarrollo para hacer funcionar el proyecto
+------------------------------------------------------------------
 
-Installation
-------------
+1 - Bajar toda la distribución PHP 8.2 correspondiente a tu sistema operativo.
+2 - Instalar composer correspondiente a tu sistema operativo.
+3 - Clonar el respositorio en una carpeta, entrar en esa carpeta y hacer un composer update para instalar las dependencias necesarias.
+4 - Instalar MySql community server correspondiente a tu sistema operativo.
+5 - Con una herramienta adecuada, abrir el fichero database.sql (dentro de la carpeta etc) con el fin de crear la base de datos local necesaria.
+6 - Configurar el fichero .env con los datos necesarios para la conexión a la base de datos MySQL (comentar cualquier otro controlador de BD)
+    - DATABASE_URL="mysql://{usuarioBd}:{passBd}@127.0.0.1:3306/myfavmovie"
+7 - Instalar SYMFONY CLI 
+8 - Lanzar el servidor de pruebas con SYMFONY SERVE, si no quieres instalar SYMFONY CLI, usar el comando $ php -S localhost:8000 -t public/
+9 - Url 127.0.0.1:8000 para probar la aplicación.
 
-There are 3 different ways of installing this project depending on your needs:
+El proyecto ya viene con una clave API de TMDB para funcionar.
 
-**Option 1.** [Download Symfony CLI][4] and use the `symfony` binary installed
-on your computer to run this command:
+Funcionamiento
+--------------
+Hacer click en el botón en el centro de la pantalla para entrar a la lista de películas favoritas (vacía en un primer momento).
+Usar la lupa de búsqueda en la parte superior derecha de la pantalla para acceder al formulario de búsqueda de películas, escribir un título y pulsar intro para ver resultados
+En la lista haz click en "añadir" a aquella película que quieras añadir a tu lista de favoritos.
+En la lista de favoritos podrás valorar tu película favorita o eliminarla de la lista
 
-```bash
-$ symfony new --demo my_project
-```
-
-**Option 2.** [Download Composer][6] and use the `composer` binary installed
-on your computer to run these commands:
-
-```bash
-# you can create a new project based on the Symfony Demo project...
-$ composer create-project symfony/symfony-demo my_project
-
-# ...or you can clone the code repository and install its dependencies
-$ git clone https://github.com/symfony/demo.git my_project
-$ cd my_project/
-$ composer install
-```
-
-**Option 3.** Click the following button to deploy this project on Platform.sh,
-the official Symfony PaaS, so you can try it without installing anything locally:
-
-<p align="center">
-<a href="https://console.platform.sh/projects/create-project?template=https://raw.githubusercontent.com/symfonycorp/platformsh-symfony-template-metadata/main/symfony-demo.template.yaml&utm_content=symfonycorp&utm_source=github&utm_medium=button&utm_campaign=deploy_on_platform"><img src="https://platform.sh/images/deploy/lg-blue.svg" alt="Deploy on Platform.sh" width="180px" /></a>
-</p>
-
-Usage
------
-
-There's no need to configure anything before running the application. There are
-2 different ways of running this application depending on your needs:
-
-**Option 1.** [Download Symfony CLI][4] and run this command:
-
-```bash
-$ cd my_project/
-$ symfony serve
-```
-
-Then access the application in your browser at the given URL (<https://localhost:8000> by default).
-
-**Option 2.** Use a web server like Nginx or Apache to run the application
-(read the documentation about [configuring a web server for Symfony][3]).
-
-On your local machine, you can run this command to use the built-in PHP web server:
-
-```bash
-$ cd my_project/
-$ php -S localhost:8000 -t public/
-```
-
-Tests
------
-
-Execute this command to run tests:
-
-```bash
-$ cd my_project/
-$ ./bin/phpunit
-```
-
+Enlaces útiles
+--------------
 [1]: https://symfony.com/doc/current/best_practices.html
 [2]: https://symfony.com/doc/current/setup.html#technical-requirements
 [3]: https://symfony.com/doc/current/setup/web_server_configuration.html
