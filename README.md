@@ -38,9 +38,9 @@ Funcionamiento
 
 Enlaces útiles
 --------------
-https://symfony.com/doc/current/best_practices.html
-https://symfony.com/doc/current/setup.html#technical-requirements
-https://symfony.com/doc/current/setup/web_server_configuration.html
-https://symfony.com/download
-https://symfony.com/book
-https://getcomposer.org/
+* https://symfony.com/doc/current/best_practices.html
+* https://symfony.com/doc/current/setup.html#technical-requirements
+* https://symfony.com/doc/current/setup/web_server_configuration.html
+* https://symfony.com/download
+* https://symfony.com/book
+* https://getcomposer.org/
