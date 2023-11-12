@@ -31,16 +31,16 @@ El proyecto ya viene con una clave API de TMDB para funcionar.
 
 Funcionamiento
 --------------
-Hacer click en el botón en el centro de la pantalla para entrar a la lista de películas favoritas (vacía en un primer momento).
-Usar la lupa de búsqueda en la parte superior derecha de la pantalla para acceder al formulario de búsqueda de películas, escribir un título y pulsar intro para ver resultados
-En la lista haz click en "añadir" a aquella película que quieras añadir a tu lista de favoritos.
-En la lista de favoritos podrás valorar tu película favorita o eliminarla de la lista
+* Hacer click en el botón en el centro de la pantalla para entrar a la lista de películas favoritas (vacía en un primer momento).
+* Usar la lupa de búsqueda en la parte superior derecha de la pantalla para acceder al formulario de búsqueda de películas, escribir un título y pulsar intro para ver resultados
+* En la lista haz click en "añadir" a aquella película que quieras añadir a tu lista de favoritos.
+* En la lista de favoritos podrás valorar tu película favorita o eliminarla de la lista
 
 Enlaces útiles
 --------------
-[1]: https://symfony.com/doc/current/best_practices.html
-[2]: https://symfony.com/doc/current/setup.html#technical-requirements
-[3]: https://symfony.com/doc/current/setup/web_server_configuration.html
-[4]: https://symfony.com/download
-[5]: https://symfony.com/book
-[6]: https://getcomposer.org/
+https://symfony.com/doc/current/best_practices.html
+https://symfony.com/doc/current/setup.html#technical-requirements
+https://symfony.com/doc/current/setup/web_server_configuration.html
+https://symfony.com/download
+https://symfony.com/book
+https://getcomposer.org/
