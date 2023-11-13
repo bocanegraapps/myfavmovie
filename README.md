@@ -25,7 +25,7 @@ Preparar el entorno de desarrollo para hacer funcionar el proyecto
     * DATABASE_URL="mysql://{usuarioBd}:{passBd}@127.0.0.1:3306/myfavmovie"
 * Instalar SYMFONY CLI 
 * Lanzar el servidor de pruebas con SYMFONY SERVE, si no quieres instalar SYMFONY CLI, usar el comando $ php -S localhost:8000 -t public/
-* Url 127.0.0.1:8000 para probar la aplicación.
+* Url 127.0.0.1:8000/es para probar la aplicación.
 
 El proyecto ya viene con una clave API de TMDB para funcionar.
 
